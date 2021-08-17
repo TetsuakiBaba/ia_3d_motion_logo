@@ -1,3 +1,5 @@
+var flg_auto_camera = true;
+var timer;
 var pos = {
   x: 0,
   y: 0,
@@ -15,9 +17,9 @@ function setup() {
   camera = createCamera();
   //   createEasyCam();
   camera.setPosition(pos.x, pos.y, pos.z);
-  
-  setInterval(function(){
-    if ( parseInt(random(5)) == 0) {
+
+  timer = setInterval(function () {
+    if (parseInt(random(5)) == 0) {
       pos.is_moving = true;
       pos.target.x = 0;
       pos.target.y = 0;
@@ -26,32 +28,47 @@ function setup() {
       pos.is_moving = true;
       pos.target.x = random(-1000, 1000);
       pos.target.y = random(-1000, 1000);
-      pos.target.z = 1000;
+      pos.target.z = random(500, 1000);
     }
-  },5000);
+  }, 3000);
 }
 
 function keyPressed() {
   if (key == " ") {
-    if ( parseInt(random(5)) == 0) {
+    flg_auto_camera = !flg_auto_camera;
+    if (!flg_auto_camera) {
+      clearInterval(timer);
       pos.is_moving = true;
       pos.target.x = 0;
       pos.target.y = 0;
       pos.target.z = 1000;
-    } else {
-      pos.is_moving = true;
-      pos.target.x = random(-1000, 1000);
-      pos.target.y = random(-1000, 1000);
-      pos.target.z = 1000;
+    }
+    else {
+      timer = setInterval(function () {
+        if (parseInt(random(5)) == 0) {
+          pos.is_moving = true;
+          pos.target.x = 0;
+          pos.target.y = 0;
+          pos.target.z = 1000;
+        } else {
+          pos.is_moving = true;
+          pos.target.x = random(-1000, 1000);
+          pos.target.y = random(-1000, 1000);
+          pos.target.z = random(500, 1000);
+        }
+      }, 3000);
     }
   }
+
 }
 function draw() {
+
+
   if (pos.is_moving) {
     camera.setPosition(pos.x, pos.y, pos.z);
-    pos.x = pos.x + (pos.target.x - pos.x) / 10;
-    pos.y = pos.y + (pos.target.y - pos.y) / 10;
-    pos.z = pos.z + (pos.target.z - pos.z) / 10;
+    pos.x = pos.x + (pos.target.x - pos.x) / 100;
+    pos.y = pos.y + (pos.target.y - pos.y) / 100;
+    pos.z = pos.z + (pos.target.z - pos.z) / 100;
     if (
       pos.target.x == pos.x &&
       pos.target.y == pos.y &&
@@ -61,13 +78,18 @@ function draw() {
     }
   }
 
+
   background(0);
+
+
+
   //  orbitControl();
   camera.lookAt(0, 0, 0);
 
+
   let dirX = (mouseX / width - 0.5) * 2;
   let dirY = (mouseY / height - 0.5) * 2;
-  ambientLight(100); // white light
+  ambientLight(120); // white light
   directionalLight(255, 255, 255, 0.9, -0.9, -1);
 
   push();
