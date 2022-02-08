@@ -12,7 +12,7 @@ var pos = {
   is_moving: false,
 };
 function setup() {
-  createCanvas(windowWidth, windowHeight, WEBGL);
+  let canvas = createCanvas(windowWidth, windowHeight, WEBGL);
   ortho(-width / 2, width / 2, height / 2, -height / 2, -10000, 10000);
   camera = createCamera();
   //   createEasyCam();
@@ -31,6 +31,24 @@ function setup() {
       pos.target.z = random(500, 1000);
     }
   }, 3000);
+
+  // URLを取得
+  var url = new URL(window.location.href);
+  // URLSearchParamsオブジェクトを取得
+  var params = url.searchParams;
+  // params.get('title');
+  if (params.get('title') != 'undefined') {
+    document.querySelector('#title').innerHTML = params.get('title');
+    document.querySelector('#title').setAttribute('title', params.get('title'));
+  }
+
+  if (params.get('message') != 'undefined') {
+    document.querySelector('#message').innerHTML = params.get('message');
+  }
+}
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  ortho(-width / 2, width / 2, height / 2, -height / 2, -10000, 10000);
 }
 
 function keyPressed() {
@@ -62,7 +80,6 @@ function keyPressed() {
 
 }
 function draw() {
-
 
   if (pos.is_moving) {
     camera.setPosition(pos.x, pos.y, pos.z);
