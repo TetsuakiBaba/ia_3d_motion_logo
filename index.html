@@ -28,6 +28,65 @@
     </p> -->
   </message>
 
+  <div class="instruction">
+    Drag to rotate | Double-click to reset view
+  </div>
+
+  <!-- Modal Structure -->
+  <div id="guidelineModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2>Design Guidelines</h2>
+      <div class="guideline-body">
+        <h3>1. Logo Usage</h3>
+        <p>The Industrial Art logo represents the department's identity. It should be used consistently across all
+          media.</p>
+
+        <h3>2. Clear Space</h3>
+        <p>Maintain a minimum clear space around the logo to ensure visibility and impact. No other elements should
+          encroach upon this space.</p>
+
+        <h3>3. Colors</h3>
+        <p>Use the primary brand colors. Do not alter the logo colors unless working in monochrome or specific
+          authorized variations.</p>
+
+        <h3>4. Typography</h3>
+        <p>The official typeface should be used for all accompanying text to maintain brand consistency.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Save Modal Structure -->
+  <div id="saveModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" id="closeSaveModal">&times;</span>
+      <h2>Save Options</h2>
+      <div class="save-body">
+        <label for="resolution-select">Resolution:</label>
+        <select id="resolution-select"
+          style="width: 100%; padding: 8px; margin-bottom: 15px; border-radius: 4px; border: 1px solid #ccc;">
+          <option value="screen">Current Screen Size</option>
+          <option value="1080p">FHD (1920 x 1080)</option>
+          <option value="4k">4K (3840 x 2160)</option>
+          <option value="square">Square (1080 x 1080)</option>
+          <option value="large-square">Large Square (2048 x 2048)</option>
+        </select>
+
+        <label>Format:</label>
+        <div style="margin-bottom: 20px;">
+          <label style="margin-right: 15px;"><input type="radio" name="format" value="png" checked> PNG</label>
+          <label style="margin-right: 15px;"><input type="radio" name="format" value="jpg"> JPG</label>
+          <label style="color: #999;" title="Not supported in WebGL mode"><input type="radio" name="format" value="svg"
+              disabled> SVG (Not supported)</label>
+        </div>
+
+        <button id="executeSave"
+          style="background-color: #333; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 1rem;">Save
+          Image</button>
+      </div>
+    </div>
+  </div>
+
   <script src="sketch.js"></script>
 
 

@@ -1,103 +1,220 @@
-
-
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
-  
+
   font-family: 'Noto Sans', sans-serif;
 }
+
 canvas {
   display: block;
 }
-message{
-  position:absolute;
-  top:70%;
-  left:50%;
-  
-  text-align:center;
-  color:rgb(230, 230, 230);
+
+message {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+
+  text-align: center;
+  color: rgb(230, 230, 230);
   transform: translate(-50%, 70%);
 }
-message h1{
-  margin:0px;
-  padding:0px;
+
+message h1 {
+  margin: 0px;
+  padding: 0px;
   font-size: 3em;
-  line-height:100%;
+  line-height: 100%;
 }
-message p{
-  margin:0px;
-  padding:0px;
-  font-size:1em;
-  line-height:150%;
+
+message p {
+  margin: 0px;
+  padding: 0px;
+  font-size: 1em;
+  line-height: 150%;
 }
-message p.small{
-  margin:0px;
-  padding:0px;
-  font-size:0.3em;
-  
+
+message p.small {
+  margin: 0px;
+  padding: 0px;
+  font-size: 0.3em;
+
 }
-message p a{
-  text-decoration:none;
-  color:black;
-  background:white;
+
+message p a {
+  text-decoration: none;
+  color: black;
+  background: white;
 }
 
 
-div{
+.instruction {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.8em;
+  pointer-events: none;
+  text-align: center;
+  backdrop-filter: blur(2px);
+  z-index: 999;
+}
+
+div {
   /* animation: glitch 1s linear infinite; */
 }
 
-@keyframes glitch{
-  2%,64%{
-    transform: translate(2px,0) skew(0deg);
+@keyframes glitch {
+
+  2%,
+  64% {
+    transform: translate(2px, 0) skew(0deg);
   }
-  4%,60%{
-    transform: translate(-2px,0) skew(0deg);
+
+  4%,
+  60% {
+    transform: translate(-2px, 0) skew(0deg);
   }
-  62%{
-    transform: translate(0,0) skew(5deg); 
+
+  62% {
+    transform: translate(0, 0) skew(5deg);
   }
 }
 
 div:before,
-div:after{
+div:after {
   /* content: attr(title); */
   /* position: absolute; */
   /* left:0px; */
 }
 
-div:before{
+div:before {
   /* animation: glitchTop 1s linear infinite; */
   /* clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%); */
   /* -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0,33%); */
 }
 
-@keyframes glitchTop{
-  2%,64%{
-    transform: translate(2px,-2px);
+@keyframes glitchTop {
+
+  2%,
+  64% {
+    transform: translate(2px, -2px);
   }
-  4%,60%{
-    transform: translate(-2px,2px);
+
+  4%,
+  60% {
+    transform: translate(-2px, 2px);
   }
-  62%{
-    transform: translate(13px,-1px) skew(-13deg); 
+
+  62% {
+    transform: translate(13px, -1px) skew(-13deg);
   }
 }
 
-div:after{
+div:after {
   animation: glitchBotom 1.5s linear infinite;
   clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
   -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
 }
 
-@keyframes glitchBotom{
-  2%,64%{
-    transform: translate(-2px,0);
+@keyframes glitchBotom {
+
+  2%,
+  64% {
+    transform: translate(-2px, 0);
   }
-  4%,60%{
-    transform: translate(-2px,0);
+
+  4%,
+  60% {
+    transform: translate(-2px, 0);
   }
-  62%{
-    transform: translate(-22px,5px) skew(21deg); 
+
+  62% {
+    transform: translate(-22px, 5px) skew(21deg);
   }
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal.show {
+  display: block;
+  opacity: 1;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 40px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 12px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  position: relative;
+  transform: translateY(-20px);
+  transition: transform 0.3s ease;
+  font-family: 'Noto Sans', sans-serif;
+  color: #333;
+}
+
+.modal.show .modal-content {
+  transform: translateY(0);
+}
+
+.close-button {
+  color: #aaa;
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal h2 {
+  margin-top: 0;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  color: #111;
+}
+
+.guideline-body h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: #444;
+}
+
+.guideline-body p {
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 15px;
 }
